@@ -18,7 +18,7 @@ import (
 )
 
 func main() {
-	lock := make(chan bool, 1)
+	lock := make(chan bool, 2)
 	for i := 1; i < 7; i++ {
 		go worker(i, lock)
 	}
