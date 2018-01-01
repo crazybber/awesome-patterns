@@ -18,6 +18,10 @@ func main() {
 	// Consume the output.
 	fmt.Println(<-out) // 4
 	fmt.Println(<-out) // 9
+
+	for n := range sq(sq(gen(2, 3))) {
+		fmt.Println(n) // 16 then 81
+	}
 }
 
 //The first stage, gen, is a function that converts a list of integers to a channel that emits the integers in the list.
