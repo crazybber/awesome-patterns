@@ -1,11 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+)
 
 func main() {
 	// unbuf()
 	// buf()
-	nBuf()
+	// nBuf()
+	syncWaitGroup()
 }
 
 /*
@@ -44,4 +48,18 @@ func nBuf() {
 	for i := 0; i < cap(done); i++ {
 		<-done
 	}
+}
+
+func syncWaitGroup() {
+	var wg sync.WaitGroup
+	// 开N个后台打印线程
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+		go func(i int) {
+			fmt.Println("你好, 世界", i)
+			wg.Done()
+		}(i)
+	}
+	// 等待N个后台线程完成
+	wg.Wait()
 }
