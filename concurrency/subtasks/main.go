@@ -1,5 +1,7 @@
 package main
 
+import "github.com/davecgh/go-spew/spew"
+
 // https://medium.com/capital-one-developers/buffered-channels-in-go-what-are-they-good-for-43703871828
 
 // One common pattern for goroutines is fan-out. When you want to apply the same data to multiple algorithms,
@@ -9,10 +11,25 @@ package main
 // ideal way to gather the data back from your subtasks.
 
 func main() {
-
+	evaluators := []Evaluator{google, yahoo, bing}
+	data := "Query"
+	r, e := DivideAndConquer(data, evaluators)
+	spew.Dump(r, e)
 }
 
-type Evaluator func(interface{}) (interface{}, error)
+var google = func(data interface{}) (interface{}, error) {
+	return data, nil
+}
+
+var yahoo = func(data interface{}) (interface{}, error) {
+	return data, nil
+}
+
+var bing = func(data interface{}) (interface{}, error) {
+	return data, nil
+}
+
+type Evaluator func(data interface{}) (interface{}, error)
 
 func DivideAndConquer(data interface{}, evaluators []Evaluator) ([]interface{}, []error) {
 	gather := make(chan interface{}, len(evaluators))
