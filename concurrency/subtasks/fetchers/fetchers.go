@@ -17,6 +17,7 @@ type GoogleFetcher struct {
 }
 
 func (g *GoogleFetcher) Fetch(url string) (string, error) {
+	time.Sleep(time.Second * 1)
 	return fmt.Sprintf("%s is fetching %s", g.Name, url), nil
 }
 
@@ -33,6 +34,7 @@ type BingFetcher struct {
 }
 
 func (b *BingFetcher) Fetch(url string) (string, error) {
+	time.Sleep(time.Second * 3)
 	return fmt.Sprintf("%s is fetching %s", b.Name, url), nil
 }
 
@@ -49,6 +51,7 @@ type DuckDuckGoFetcher struct {
 }
 
 func (d *DuckDuckGoFetcher) Fetch(url string) (string, error) {
+	time.Sleep(time.Second * 2)
 	return fmt.Sprintf("%s is fetching %s", d.Name, url), nil
 }
 
@@ -60,8 +63,8 @@ func NewDuckDuckGoFetcherFetcher(name string) *DuckDuckGoFetcher {
 	return &DuckDuckGoFetcher{Name: name}
 }
 func FetchResults(url string, fetchers []Fetcher, timeout time.Duration) ([]string, []error) {
-	chStr := make(chan string)
-	chErr := make(chan error)
+	chStr := make(chan string, len(fetchers))
+	chErr := make(chan error, len(fetchers))
 	for _, f := range fetchers {
 		go func(f Fetcher) {
 			s, err := f.Fetch(url)
@@ -72,8 +75,8 @@ func FetchResults(url string, fetchers []Fetcher, timeout time.Duration) ([]stri
 			}
 		}(f)
 	}
-	stringResults := []string{}
-	errorResults := []error{}
+	stringResults := make([]string, 0, len(fetchers))
+	errorResults := make([]error, 0, len(fetchers))
 	for range fetchers {
 		select {
 		case s := <-chStr:
