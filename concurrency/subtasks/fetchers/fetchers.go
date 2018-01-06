@@ -34,7 +34,7 @@ type BingFetcher struct {
 }
 
 func (b *BingFetcher) Fetch(url string) (string, error) {
-	time.Sleep(time.Second * 3)
+	time.Sleep(time.Second * 10)
 	return fmt.Sprintf("%s is fetching %s", b.Name, url), nil
 }
 
@@ -51,7 +51,7 @@ type DuckDuckGoFetcher struct {
 }
 
 func (d *DuckDuckGoFetcher) Fetch(url string) (string, error) {
-	time.Sleep(time.Second * 2)
+	time.Sleep(time.Second * 10)
 	return fmt.Sprintf("%s is fetching %s", d.Name, url), nil
 }
 
@@ -67,11 +67,23 @@ func FetchResults(url string, fetchers []Fetcher, timeout time.Duration) ([]stri
 	chErr := make(chan error, len(fetchers))
 	for _, f := range fetchers {
 		go func(f Fetcher) {
-			s, err := f.Fetch(url)
-			if err != nil {
+			ch := make(chan string, 1)
+			eCh := make(chan error, 1)
+			go func() {
+				s, err := f.Fetch(url)
+				if err != nil {
+					eCh <- err
+				} else {
+					ch <- s
+				}
+			}()
+			select {
+			case r := <-ch:
+				chStr <- r
+			case err := <-eCh:
 				chErr <- err
-			} else {
-				chStr <- s
+			case <-time.After(timeout):
+				chErr <- fmt.Errorf("%s timeout after %v on %v", f.GetName(), timeout, url)
 			}
 		}(f)
 	}
@@ -89,7 +101,7 @@ func FetchResults(url string, fetchers []Fetcher, timeout time.Duration) ([]stri
 }
 
 func RunFetchers() {
-	fetchers := []Fetcher{NewGoogleFetcher("Google"), NewGoogleFetcher("Bing"), NewGoogleFetcher("Duck Duck Go")}
-	r, e := FetchResults("http://www.abc.com", fetchers, time.Millisecond*100)
+	fetchers := []Fetcher{NewGoogleFetcher("Google"), NewBingFetcher("Bing"), NewDuckDuckGoFetcherFetcher("Duck Duck Go")}
+	r, e := FetchResults("http://www.abc.com", fetchers, time.Second*2)
 	spew.Dump(r, e)
 }

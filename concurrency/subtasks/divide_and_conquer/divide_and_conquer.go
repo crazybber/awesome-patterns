@@ -30,6 +30,7 @@ func RunDivideAndConquer() {
 
 	evaluators := []Evaluator{
 		EvaluatorFunc(func(inV interface{}) (interface{}, error) {
+			time.Sleep(time.Second * 1)
 			i := inV.(in)
 			r := i.a + i.b
 			return out{"Plus", r}, nil
@@ -83,11 +84,18 @@ func DivideAndConquer(data interface{}, evaluators []Evaluator, timeout time.Dur
 			go func() {
 				result, err := e.Evaluate(data)
 				if err != nil {
-					errors <- err
+					ech <- err
 				} else {
 					ch <- result
 				}
 			}()
+			// Remember that an unbuffered channel pauses the writing goroutine until there’s a read by another
+			// goroutine. If the timeout triggers before the Evaluator finishes executing,
+			// the read will never happen because the only place those channels are read is in the outer
+			// goroutine’s select statement, and the outer goroutine exited after the timeout triggered.
+			// This means that using an unbuffered channel will cause the inner goroutine to wait forever
+			// whenever there is a timeout, leaking the goroutine. Again, the buffered channel proves
+			// useful because we know exactly how many writes we can expect.
 			select {
 			case r := <-ch:
 				gather <- r
