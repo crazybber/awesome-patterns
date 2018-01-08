@@ -3,7 +3,6 @@ package ch1
 import (
 	"fmt"
 	"strings"
-	"sync"
 )
 
 var initialString string
@@ -11,8 +10,7 @@ var initialBytes []byte
 var stringLength int
 var finalString string
 var lettersProcessed int
-var applicationStatus bool
-var wg sync.WaitGroup
+var applicationStatusL bool
 
 func getLetters(gQ chan string) {
 	for i := range initialBytes {
@@ -22,7 +20,7 @@ func getLetters(gQ chan string) {
 func capitalizeLetters(gQ chan string, sQ chan string) {
 	for {
 		if lettersProcessed >= stringLength {
-			applicationStatus = false
+			applicationStatusL = false
 			break
 		}
 		select {
@@ -34,7 +32,7 @@ func capitalizeLetters(gQ chan string, sQ chan string) {
 	}
 }
 func RunLetter() {
-	applicationStatus = true
+	applicationStatusL = true
 	getQueue := make(chan string)
 	stackQueue := make(chan string)
 	initialString = `Four score and seven years ago our fathers
@@ -50,7 +48,7 @@ created equal.`
 	close(getQueue)
 	close(stackQueue)
 	for {
-		if applicationStatus == false {
+		if applicationStatusL == false {
 			fmt.Println("Done")
 			fmt.Println(finalString)
 			break

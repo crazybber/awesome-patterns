@@ -4,5 +4,6 @@ import "github.com/jianhan/go-patterns/concurrency/mastering_concurrency_in_go/c
 
 func main() {
 	// ch1.Run()
-	ch1.RunLetter()
+	// ch1.RunLetter()
+	ch1.RunSpider()
 }
