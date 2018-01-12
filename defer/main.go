@@ -15,9 +15,15 @@ func nilFuncDefer() {
 // Do not use defer inside a loop unless you are sure about what you are doing. It may not work as expected.
 // However, in some situations it will be handy for instance,delegating the recursivity of a func to a defer.
 func deferInsideLoop() {
-
+	nums := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}
+	for _, v := range nums {
+		defer func(v int) {
+			fmt.Println(v)
+		}(v)
+	}
 }
 
 func main() {
-	nilFuncDefer()
+	// nilFuncDefer()
+	deferInsideLoop()
 }
