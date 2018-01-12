@@ -23,7 +23,19 @@ func deferInsideLoop() {
 	}
 }
 
+// The deferred func above will only run when the func ends not when the deferred func’s surrounding block ends
+// (the area inside curly braces containing the defer call). As seen in the example code, you can create separate blocks just using curly braces.
+func block() {
+	{
+		defer func() {
+			fmt.Println("block: defer runs")
+		}()
+	}
+	fmt.Println("main: ends")
+}
+
 func main() {
 	// nilFuncDefer()
-	deferInsideLoop()
+	// deferInsideLoop()
+	block()
 }
