@@ -12,6 +12,12 @@ func nilFuncDefer() {
 	fmt.Println("runs")
 }
 
+// Do not use defer inside a loop unless you are sure about what you are doing. It may not work as expected.
+// However, in some situations it will be handy for instance,delegating the recursivity of a func to a defer.
+func deferInsideLoop() {
+
+}
+
 func main() {
 	nilFuncDefer()
 }
