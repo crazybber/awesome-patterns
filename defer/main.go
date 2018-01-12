@@ -34,8 +34,42 @@ func block() {
 	fmt.Println("main: ends")
 }
 
+type Car struct {
+	model string
+}
+
+func (c Car) PrintModel() {
+	fmt.Println(c.model)
+}
+
+type Dog struct {
+	name string
+}
+
+func (d *Dog) MakeSound() {
+	fmt.Println("WOFF my name is", d.name)
+}
+
+// So, when a method with a value-receiver is used with defer, the receiver will be copied (in this case Car) at the time of
+// registering and the changes to it wouldn’t be visible (Car.model). Because, the receiver is also an input param and evaluated immediately to “DeLorean DMC-12” when it’s
+// registered with the defer.
+func deferStruct() {
+	c := Car{model: "model 1211"}
+	defer c.PrintModel()
+	c.model = "model 2018"
+}
+
+// Remember that the passed params to a deferred func are saved aside immediately without waiting the deferred func to be run.
+func deferPointer() {
+	d := &Dog{name: "James"}
+	defer d.MakeSound()
+	d.name = "Ann"
+}
+
 func main() {
 	// nilFuncDefer()
 	// deferInsideLoop()
-	block()
+	// block()
+	// deferStruct()
+	deferPointer()
 }
