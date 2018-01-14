@@ -9,3 +9,5 @@ package main
 
 // Objectives: Grouping related families of objects is very convenient when your object number is growing so much that
 // creating a unique point to get them all seems the only way to gain the flexible of runtime object creation.
+
+
