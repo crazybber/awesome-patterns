@@ -10,7 +10,11 @@ package main
 // when it can’t accept any more work because it’s busy. No work is ever lost or stuck in a
 // queue that has no guarantee it will ever be worked on.
 
-import "sync"
+import (
+	"log"
+	"sync"
+	"time"
+)
 
 // Worker must be implemented by types that want to use
 // the work pool.
@@ -68,4 +72,51 @@ func (p *Pool) Run(w Worker) {
 func (p *Pool) Shutdown() {
 	close(p.work)
 	p.wg.Wait()
+}
+
+var names = []string{
+	"steve",
+	"bob",
+	"mary",
+	"therese",
+	"jason",
+}
+
+// namePrinter provides special support for printing names.
+type namePrinter struct {
+	name string
+}
+
+// Task implements the Worker interface.
+func (m *namePrinter) Task() {
+	log.Println(m.name)
+	time.Sleep(time.Second)
+}
+
+// main is the entry point for all Go programs.
+func main() {
+	// Create a work pool with 2 goroutines.
+	p := New(2)
+	var wg sync.WaitGroup
+	wg.Add(100 * len(names))
+	for i := 0; i < 100; i++ {
+		// Iterate over the slice of names.
+		for _, name := range names {
+			// Create a namePrinter and provide the
+			// specific name.
+			np := namePrinter{
+				name: name,
+			}
+			go func() {
+				// Submit the task to be worked on. When RunTask
+				// returns we know it is being handled.
+				p.Run(&np)
+				wg.Done()
+			}()
+		}
+	}
+	wg.Wait()
+	// Shutdown the work pool and wait for all existing work
+	// to be completed.
+	p.Shutdown()
 }
