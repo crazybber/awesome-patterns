@@ -1,6 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"bytes"
+	"fmt"
+	"sync"
+	"time"
+
+	"github.com/golang/go/src/pkg/math/rand"
+)
 
 // Confinement is the simple yet powerful idea of ensuring information is only ever available from one concurrent process.
 // There are two kinds of confinement possible: ad hoc and lexical.
@@ -8,8 +15,13 @@ import "fmt"
 // Lexical confinement involves using lexical scope to expose only the correct data and
 // concurrency primitives for multiple concurrent processes to use. It makes it impossible to do the wrong thing.
 
+// If a goroutine is responsible for creating a goroutine, it is also responsible for ensuring it can stop the goroutine.
+
 func main() {
-	lexicalDemo()
+	// lexicalNotConcurrentSafe()
+	// lexicalDemo()
+	// blockOnAttemptingToWriteToChannel()
+	fixBlockOnAttemptingToWriteToChannel()
 }
 
 func lexicalDemo() {
@@ -42,4 +54,70 @@ func lexicalDemo() {
 	// main goroutine to a read-only view of the channel.
 	results := chanOwner()
 	comsumer(results)
+}
+
+func lexicalNotConcurrentSafe() {
+	printData := func(wg *sync.WaitGroup, data []byte) {
+		defer wg.Done()
+		var buff bytes.Buffer
+		for _, b := range data {
+			fmt.Fprintf(&buff, "%c", b)
+		}
+		fmt.Println(buff.String())
+	}
+	var wg sync.WaitGroup
+	wg.Add(2)
+	data := []byte("golang")
+	// Here we pass in a slice containing the first three bytes in the data structure.
+	go printData(&wg, data[:3])
+	// Here we pass in a slice containing the last three bytes in the data structure.
+	go printData(&wg, data[3:])
+	wg.Wait()
+}
+
+func blockOnAttemptingToWriteToChannel() {
+	newRandStream := func() <-chan int {
+		randStream := make(chan int)
+		go func() {
+			defer fmt.Println("newRandStream closure existed.")
+			defer close(randStream)
+			for {
+				randStream <- rand.Int()
+			}
+		}()
+		return randStream
+	}
+	randStream := newRandStream()
+	fmt.Println("3 random ints:")
+	for i := 1; i <= 3; i++ {
+		fmt.Printf("%d: %d\n", i, <-randStream)
+	}
+}
+
+// The solution, just like for the receiving case, is to provide the
+// producer goroutine with a channel informing it to exit
+func fixBlockOnAttemptingToWriteToChannel() {
+	d := make(chan interface{})
+	newRandStream := func(done <-chan interface{}) <-chan int {
+		randStream := make(chan int)
+		go func() {
+			defer fmt.Println("newRandStream closure existed.")
+			defer close(randStream)
+			for {
+				select {
+				case randStream <- rand.Int():
+				case <-done:
+					return
+				}
+			}
+		}()
+		return randStream
+	}
+	randStream := newRandStream(d)
+	fmt.Println("3 random ints:")
+	for i := 1; i <= 3; i++ {
+		fmt.Printf("%d: %d\n", i, <-randStream)
+	}
+	close(d)
+	time.Sleep(1 * time.Second)
 }
