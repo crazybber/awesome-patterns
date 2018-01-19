@@ -17,6 +17,6 @@ var feedLockLinkTypes = [...]string{
 func (f FeedLockLinkType) String() string { return feedLockLinkTypes[f] }
 
 func main() {
-	test := FeedLockLinkType(Racing)
+	test := FeedLockLinkType(Racing).String()
 	spew.Dump(test)
 }
