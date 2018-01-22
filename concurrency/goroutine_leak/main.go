@@ -20,6 +20,7 @@ goroutines in some sort of organized fashion.
 **/
 
 func main() {
+	resourceLeak()
 	cancellationSignal()
 }
 
