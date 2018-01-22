@@ -33,6 +33,8 @@ func errorHandling() {
 				result = Result{Error: err, Response: resp}
 				select {
 				case <-done:
+					// TODO: need to refactor the code, this might be a bug since
+					// this will never execute.
 					return
 				// This is where we write the Result to our channel
 				case results <- result:
