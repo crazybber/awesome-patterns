@@ -1,46 +1,33 @@
 package main
 
 import (
+	"fmt"
 	"time"
-
-	"github.com/davecgh/go-spew/spew"
 )
 
 // package shows if read/write concurrently via struct
 
 type Person struct {
-	Name   string
-	Age    uint32
-	Hobbit string
+	Name string
 }
 
-func (p *Person) generateAge() {
-	// mock read
+// simulate write operation for struct property which is name is this case
+func (p *Person) updateName1() {
 	for {
-		n := p.Name
-		spew.Dump(n)
-	}
-
-}
-
-func (p *Person) generateHobbit() {
-	// mock read
-	for {
-		n := p.Name
-		spew.Dump(n)
-	}
-
-}
-
-func (p *Person) mockWrite1() {
-	for {
-		p.Name = "Nmae1"
+		p.Name = "Dummy Name 1"
 	}
 }
 
-func (p *Person) mockWrite2() {
+// simulate write operation for struct property which is name is this case
+func (p *Person) updateName2() {
 	for {
-		p.Name = "Nmae2"
+		p.Name = "Dummy Name 2"
+	}
+}
+
+func (p *Person) printName() {
+	for {
+		fmt.Println("Current Name Is : ", p.Name)
 	}
 }
 
@@ -48,10 +35,9 @@ var m = map[string]int{"a": 1}
 
 func main() {
 	p := &Person{Name: "James"}
-	go p.generateAge()
-	go p.generateHobbit()
-	go p.mockWrite1()
-	go p.mockWrite2()
+	go p.updateName1()
+	go p.updateName2()
+	go p.printName()
 	// SimulateConcurrentReadWriteMap()
 	time.Sleep(2 * time.Second)
 }
