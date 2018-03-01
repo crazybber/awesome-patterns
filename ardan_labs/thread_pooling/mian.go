@@ -1,5 +1,6 @@
 package main
 
+// article https://www.ardanlabs.com/blog/2013/05/thread-pooling-in-go-programming.html
 import (
 	"bufio"
 	"fmt"
@@ -25,7 +26,10 @@ func (mw *MyWork) DoWork(workRoutine int) {
 
 func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
-
+	// we create a thread pool where the number of routines to use is based on the number of cores we have on the machine.
+	// This means we have a routine for each core. You can’t do any more work if each core is busy.
+	// Again, performance testing will determine what this number should be. The second parameter is the size of the queue.
+	// In this case I have made the queue large enough to handle all the requests coming in.
 	workPool := New(runtime.NumCPU(), 800)
 
 	shutdown := false // Race Condition, Sorry
