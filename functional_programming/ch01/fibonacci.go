@@ -2,17 +2,37 @@ package main
 
 import "fmt"
 
-func Fibonacci(x int) int {
+type Memoized func(int) int
+
+var fibMem = Memoize(fib)
+
+func Memoize(mf Memoized) Memoized {
+	cache := make(map[int]int)
+	return func(key int) int {
+		if val, found := cache[key]; found {
+			return val
+		}
+		temp := mf(key)
+		cache[key] = temp
+		return temp
+	}
+}
+
+func FibMemoized(n int) int {
+	return fibMem(n)
+}
+
+func fib(x int) int {
 	if x == 0 {
 		return 0
 	} else if x <= 2 {
 		return 1
 	} else {
-		return Fibonacci(x-2) + Fibonacci(x-1)
+		return fib(x-2) + fib(x-1)
 	}
 }
 
 func main() {
-	fib := Fibonacci
-	fmt.Printf("%vn", fib(50))
+	fmt.Println(fib(30))
+	fmt.Println(FibMemoized(30))
 }
