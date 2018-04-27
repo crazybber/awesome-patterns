@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sync"
 	"time"
 )
 
@@ -11,7 +12,8 @@ type Job struct {
 	text string
 }
 
-func outputText(j *Job) {
+func outputText(j *Job, wg *sync.WaitGroup) {
+	defer wg.Done()
 	for j.i < j.max {
 		time.Sleep(1 * time.Millisecond)
 		fmt.Println(j.text)
@@ -20,6 +22,7 @@ func outputText(j *Job) {
 }
 
 func main() {
+	wg := new(sync.WaitGroup)
 	hello := new(Job)
 	world := new(Job)
 	hello.text = "hello"
@@ -28,6 +31,8 @@ func main() {
 	world.text = "world"
 	world.i = 0
 	world.max = 5
-	go outputText(hello)
-	outputText(world)
+	go outputText(hello, wg)
+	go outputText(world, wg)
+	wg.Add(2)
+	wg.Wait()
 }
