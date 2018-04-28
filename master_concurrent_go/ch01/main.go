@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"runtime"
+	"strconv"
 	"time"
 )
 
@@ -39,17 +40,24 @@ func main() {
 	go outputText(hello)
 	go outputText(world)
 	goSched()
+	runtime.GOMAXPROCS(2)
+	fmt.Printf("%d thread(s) available to Go.", listThreads())
 }
 
 func goSched() {
 	iterations := 10
 	for i := 0; i <= iterations; i++ {
-		go showNumber(i)
+		showNumber(i)
 	}
-	runtime.Gosched()
 	fmt.Println("Goodbye!")
 }
 
 func showNumber(num int) {
-	fmt.Println(num)
+	tstamp := strconv.FormatInt(time.Now().UnixNano(), 10)
+	fmt.Println(num, tstamp)
+}
+
+func listThreads() int {
+	threads := runtime.GOMAXPROCS(0)
+	return threads
 }
