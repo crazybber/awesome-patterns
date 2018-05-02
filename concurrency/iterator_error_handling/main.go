@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"time"
 
+	"sync"
+
 	"github.com/davecgh/go-spew/spew"
 )
 
@@ -77,29 +79,34 @@ func v2() {
 		results := make(chan Result)
 		go func() {
 			defer close(results)
+			wg := sync.WaitGroup{}
+			wg.Add(len(urls))
 			for _, url := range urls {
-				select {
-				case <-done:
-					return
-				default:
-					println("EXECUTE : ", url)
-					resp, err := http.Get(url)
-					results <- Result{Error: err, Response: resp}
-				}
+				go func(url string) {
+					defer wg.Done()
+					select {
+					case <-done:
+						return
+					default:
+						println("EXECUTE : ", url)
+						resp, err := http.Get(url)
+						results <- Result{Error: err, Response: resp}
+					}
+				}(url)
 			}
+			wg.Wait()
 		}()
 		return results
 	}
-	done := make(chan interface{})
+	done := make(chan interface{}, 1)
 	defer close(done)
 	urls := []string{
 		"https://www.google.com",
 		"https://blog.golang.org/pipelines",
 		"https://github.com/jianhan",
 		"https://insights.stackoverflow.com/survey/2017",
-		"A",
 		"https://hackernoon.com/top-10-python-web-frameworks-to-learn-in-2018-b2ebab969d1a",
-		"B",
+		"https://blog.kowalczyk.info/article/1Bkr/3-ways-to-iterate-in-go.html",
 	}
 	for result := range checkStatus(done, urls...) {
 		if result.Error != nil {
