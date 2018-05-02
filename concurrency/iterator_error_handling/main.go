@@ -78,32 +78,36 @@ func v2() {
 		go func() {
 			defer close(results)
 			for _, url := range urls {
-				var result Result
-				resp, err := http.Get(url)
-				result = Result{Error: err, Response: resp}
 				select {
-
 				case <-done:
 					return
-				case results <- result:
+				default:
+					println("EXECUTE : ", url)
+					resp, err := http.Get(url)
+					results <- Result{Error: err, Response: resp}
 				}
 			}
 		}()
 		return results
 	}
 	done := make(chan interface{})
-	errCount := 0
-	urls := []string{"a", "https://www.google.com", "b", "c", "d"}
+	defer close(done)
+	urls := []string{
+		"https://www.google.com",
+		"https://blog.golang.org/pipelines",
+		"https://github.com/jianhan",
+		"https://insights.stackoverflow.com/survey/2017",
+		"A",
+		"https://hackernoon.com/top-10-python-web-frameworks-to-learn-in-2018-b2ebab969d1a",
+		"B",
+	}
 	for result := range checkStatus(done, urls...) {
 		if result.Error != nil {
+			done <- true
 			fmt.Printf("error: %v\n", result.Error)
-			errCount++
-			if errCount >= 3 {
-				fmt.Println("Too many errors, breaking!")
-				break
-			}
-			continue
+			break
 		}
 		fmt.Printf("Response: %v\n", result.Response.Status)
 	}
+	fmt.Println("End")
 }
