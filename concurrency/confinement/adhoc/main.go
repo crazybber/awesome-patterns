@@ -24,4 +24,20 @@ func main() {
 	for num := range handleData {
 		fmt.Println(num)
 	}
+
+	doWork := func(strings <-chan string) <-chan interface{} {
+		completed := make(chan interface{})
+		go func() {
+			defer fmt.Println("doWork exited.")
+			defer close(completed)
+			for s := range strings {
+				// Do something interesting
+				fmt.Println(s, "TTT")
+			}
+		}()
+		return completed
+	}
+	doWork(nil)
+	// Perhaps more work is done here
+	fmt.Println("Done.")
 }

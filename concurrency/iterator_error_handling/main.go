@@ -107,8 +107,6 @@ func v2() {
 		"https://insights.stackoverflow.com/survey/2017",
 		"https://hackernoon.com/top-10-python-web-frameworks-to-learn-in-2018-b2ebab969d1a",
 		"https://blog.kowalczyk.info/article/1Bkr/3-ways-to-iterate-in-go.html",
-		"A",
-		"B",
 	}
 	for result := range checkStatus(done, urls...) {
 		if result.Error != nil {
