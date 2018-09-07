@@ -1,6 +1,6 @@
 # Bounded Parallelism Pattern
 
-[Bounded parallelism](https://blog.golang.org/pipelines#TOC_9.) is similar to [parallelism](parallelism.md), but allows limits to be placed on allocation.
+[Bounded parallelism](https://blog.golang.org/pipelines#TOC_9.) is similar to [parallelism](../parallelism.md), but allows limits to be placed on allocation.
 
 # Implementation and Example
 
