@@ -23,8 +23,9 @@ func TestUploadFormFile(t *testing.T) {
 	}
 
 	// create form data
-	var body bytes.Buffer
-	writer := multipart.NewWriter(&body)
+	body := new(bytes.Buffer)
+	//body := &bytes.Buffer{}
+	writer := multipart.NewWriter(body)
 	formFile, err := writer.CreateFormFile("file", filepath.Base(filePath))
 	if err != nil {
 		t.Fatal(err)
@@ -35,7 +36,7 @@ func TestUploadFormFile(t *testing.T) {
 	writer.Close()
 
 	// create http post request
-	req, err := http.NewRequest(http.MethodPost, url, &body)
+	req, err := http.NewRequest(http.MethodPost, url, body)
 	if err != nil {
 		t.Fatal(err)
 	}
