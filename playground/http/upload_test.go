@@ -26,11 +26,11 @@ func TestUploadFormFile(t *testing.T) {
 	body := new(bytes.Buffer)
 	//body := &bytes.Buffer{}
 	writer := multipart.NewWriter(body)
-	formFile, err := writer.CreateFormFile("file", filepath.Base(filePath))
+	formFileWriter, err := writer.CreateFormFile("file", filepath.Base(filePath))
 	if err != nil {
 		t.Fatal(err)
 	}
-	if _, err = io.Copy(formFile, bytes.NewReader(yamlFile)); err != nil {
+	if _, err = io.Copy(formFileWriter, bytes.NewReader(yamlFile)); err != nil {
 		t.Fatal(err)
 	}
 	writer.Close()
