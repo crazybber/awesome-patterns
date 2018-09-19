@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"mime/multipart"
 	"net/http"
-	"os"
 	"path/filepath"
 	"testing"
 )
@@ -16,22 +15,21 @@ func TestUploadFormFile(t *testing.T) {
 	var filePath = "/Users/bruce/Desktop/HVAC-CoolMasterNet.yml"
 	var url = "http://localhost:48081/api/v1/deviceprofile/uploadfile"
 
-	// fetch file
-	file, err := os.Open(filePath)
+	// Retch file
+	fmt.Println("Read file: ", filepath.Base(filePath))
+	yamlFile, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer file.Close()
 
 	// create form data
 	var body bytes.Buffer
 	writer := multipart.NewWriter(&body)
-	fmt.Println(filepath.Base(file.Name()))
-	formFile, err := writer.CreateFormFile("file", filepath.Base(file.Name()))
+	formFile, err := writer.CreateFormFile("file", filepath.Base(filePath))
 	if err != nil {
 		t.Fatal(err)
 	}
-	if _, err = io.Copy(formFile, file); err != nil {
+	if _, err = io.Copy(formFile, bytes.NewReader(yamlFile)); err != nil {
 		t.Fatal(err)
 	}
 	writer.Close()
