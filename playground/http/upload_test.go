@@ -30,7 +30,8 @@ func TestUploadFormFile(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if _, err = io.Copy(formFileWriter, bytes.NewReader(yamlFile)); err != nil {
+	_, err = io.Copy(formFileWriter, bytes.NewReader(yamlFile))
+	if err != nil {
 		t.Fatal(err)
 	}
 	writer.Close()
