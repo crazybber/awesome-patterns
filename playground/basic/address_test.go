@@ -31,10 +31,10 @@ func TestStructAddress(t *testing.T) {
 }
 
 func passStructByVariable(a robot) {
-	fmt.Printf("%T, %v, %p \n", a, a, &a)
+	fmt.Printf("[passStructByVariable] %T, %v, %p \n", a, a, &a)
 }
 
 func passStructByPointer(a *robot) {
-	fmt.Printf("%T, %v, %p \n", a, a, &a)
-	fmt.Printf("%T, %v, %p \n", *a, *a, &*a)
+	fmt.Printf("[passStructByPointer] %T, %v, %p \n", a, a, &a)
+	fmt.Printf("[passStructByPointer] %T, %v, %p \n", *a, *a, &*a)
 }
