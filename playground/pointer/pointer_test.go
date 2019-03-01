@@ -18,3 +18,9 @@ func TestBasic(t *testing.T) {
 	fmt.Println(*address2)
 
 }
+
+func TestPointer(t *testing.T) {
+	var test *string = new(string)
+	*test = "123"
+	fmt.Println(test)
+}
