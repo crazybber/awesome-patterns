@@ -1,3 +1,4 @@
+// 命令模式(command pattern)主要解耦了行为和接收者，使之可以任意组合为一个完整的命令，并在合适的时候被调用
 // 主要分为四个部分，command ,ConcreteCommand ,receiver ,invoker.
 // 分别对应以下GameCommand ,(CommandAttack|CommandEscape) ,GamePlayer ,Invoker.
 package main
