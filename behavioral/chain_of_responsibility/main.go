@@ -58,7 +58,7 @@ func main(){
 	fps := FPSGame{TypeFPS}
 	rpg := RPGGame{TypeRPG}
 
-	sl := GameSelector{make([]Game ,0)}
+	sl := GameSelector{}
 	sl.AddGame(fps ,rpg)
 
 	player := "icg"
