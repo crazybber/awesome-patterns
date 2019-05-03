@@ -8,10 +8,14 @@ import (
 	"log"
 )
 
+// originator
 type Player struct {
+	// 需要记录的数据可以考虑单独封装
+	// type Pos struct{X,Y int}
 	X,Y int
-	Name string
+
 	// other info
+	Name string
 }
 
 func (p *Player)MoveTo(x,y int){
@@ -31,10 +35,12 @@ func (p *Player)Restore(m PlayerMemento){
 	p.Y = m.Y
 }
 
+// memento
 type PlayerMemento struct {
 	X,Y int
 }
 
+// caretaker
 type PlayerCareTaker struct {
 	MementoList *list.List
 }
@@ -75,4 +81,12 @@ func main(){
 
 	icg.Restore(ct.RemoveLast())
 	log.Println(icg.X ,icg.Y)
+	/*
+	output:
+	2019/05/02 18:18:03 114 514
+	2019/05/02 18:18:03 810 19
+	2019/05/02 18:18:03 0 0
+	2019/05/02 18:18:03 810 19
+	2019/05/02 18:18:03 114 514
+	 */
 }

@@ -42,9 +42,9 @@ A curated collection of idiomatic design & application patterns for Go language.
 | [Memento](/behavioral/memento/main.go) | Generate an opaque token that can be used to go back to a previous state | ✔ |
 | [Observer](/behavioral/observer.md) | Provide a callback for notification of events/changes to data | ✔ |
 | [Registry](/behavioral/registry.md) | Keep track of all subclasses of a given class | ✘ |
-| [State](/behavioral/state.md) | Encapsulates varying behavior for the same object based on its internal state | ✘ |
+| [State](/behavioral/state.md) | Encapsulates varying behavior for the same object based on its internal state | ✔ |
 | [Strategy](/behavioral/strategy.md) | Enables an algorithm's behavior to be selected at runtime | ✔ |
-| [Template](/behavioral/template.md) | Defines a skeleton class which defers some methods to subclasses | ✘ |
+| [Template](/behavioral/template.md) | Defines a skeleton class which defers some methods to subclasses | ✔ |
 | [Visitor](/behavioral/visitor.md) | Separates an algorithm from an object on which it operates | ✘ |
 
 ## Synchronization Patterns

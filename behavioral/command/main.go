@@ -69,13 +69,14 @@ func main(){
 	attk := CommandAttack{playerA}
 	escp := CommandEscape{playerA}
 
-	invoker.PushCommands(attk ,escp ,escp ,attk)
+	invoker.PushCommands(attk ,escp ,escp ,attk ,escp)
 	invoker.CallCommands()
 	// output:
 	/*
-		icg opened fire
-		icg escape
-		icg escape
-		icg opened fire
+	icg opened fire
+	icg escape
+	icg escape
+	icg opened fire
+	icg escape
 	*/
 }
