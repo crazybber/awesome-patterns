@@ -61,7 +61,7 @@ A curated collection of idiomatic design & application patterns for Go language.
 
 | Pattern | Description | Status |
 |:-------:|:----------- |:------:|
-| [N-Barrier](/concurrency/barrier/main.go) | Prevents a process from proceeding until all N processes reach to the barrier | ✔ |
+| [N-Barrier](/concurrency/n_barrier/main.go) | Prevents a process from proceeding until all N processes reach to the barrier | ✔ |
 | [Bounded Parallelism](/concurrency/bounded_parallelism.md) | Completes large number of independent tasks with resource limits | ✔ |
 | [Broadcast](/concurrency/broadcast.md) | Transfers a message to all recipients simultaneously | ✘ |
 | [Coroutines](/concurrency/coroutine.md) | Subroutines that allow suspending and resuming execution at certain locations | ✘ |
