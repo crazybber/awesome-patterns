@@ -13,27 +13,28 @@ type IBarrier interface {
 
 // once
 type ChanBarrier struct {
-	gos int
-	curGos int
-	ch chan struct{}
-	m sync.Mutex
+	waitCh chan struct{}
+	sign chan struct{}
 }
 
 func NewChanBarrier(gos int)*ChanBarrier{
-	return &ChanBarrier{
-		gos:gos,
-		ch:make(chan struct{}),
+	b := &ChanBarrier{
+		waitCh:make(chan struct{} ,gos-1),
+		sign:make(chan struct{}),
 	}
+	for i:=0;i<gos-1;i++{
+		b.waitCh <- struct{}{}
+	}
+	return b
 }
 
-func (c *ChanBarrier) Await() error {
-	c.m.Lock()
-	if c.curGos++;c.gos != c.curGos{
-		c.m.Unlock()
-		<- c.ch
-	}else{
-		c.m.Unlock()
-		close(c.ch)
+func (b *ChanBarrier) Await() error {
+	select {
+	case <- b.waitCh:
+		<- b.sign
+	default:
+		close(b.sign)
+		close(b.waitCh)
 	}
 	return nil
 }
@@ -79,14 +80,14 @@ func main(){
 	//b = NewBarrier(uint(gos))
 	b = NewChanBarrier(gos)
 	for i:=0;i<gos ;i++ {
-		go func() {
-			log.Println("await")
+		go func(n int) {
+			log.Println(n ,"await")
 			if err := b.Await();err != nil{
 				log.Println(err)
 			}
-			log.Println("pass")
+			log.Println(n ,"pass")
 			wg.Done()
-		}()
+		}(i)
 	}
 	wg.Wait()
 }
