@@ -11,10 +11,11 @@
 
 A curated collection of idiomatic design & application patterns for Go language.
 
-+ ** Merged : https://github.com/nynicg/go-patterns** 
-+ ** Merged : https://github.com/weichou1229/go-patterns** 
-+ ** Merged : https://github.com/jianhan/go-patterns** 
+## Update History
 
++ *Merged : https://github.com/nynicg/go-patterns*
++ *Merged : https://github.com/weichou1229/go-patterns* 
++ *Merged : https://github.com/jianhan/go-patterns*
 
 
 ## Creational Patterns
