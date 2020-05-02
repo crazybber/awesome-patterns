@@ -33,7 +33,7 @@
     * [Semaphore](/synchronization/semaphore.md)
   * [Concurrency Patterns](/README.md#concurrency-patterns)
     * [N-Barrier](/concurrency/barrier.md)
-    * [Bounded Parallelism](/concurrency/bounded_parallelism.md)
+    * [Bounded Parallelism](/concurrency/bounded/bounded_parallelism.md)
     * [Broadcast](/concurrency/broadcast.md)
     * [Coroutines](/concurrency/coroutine.md)
     * [Generators](/concurrency/generator.md)
