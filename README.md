@@ -16,7 +16,8 @@ A curated collection of idiomatic design & application patterns for Go language.
 + *Merged : https://github.com/nynicg/go-patterns*
 + *Merged : https://github.com/weichou1229/go-patterns* 
 + *Merged : https://github.com/jianhan/go-patterns*
-
++ *Merged : https://github.com/sakari-ai/go-patterns*
++ *Merged ：https://github.com/restudy/go-patterns*
 
 ## Creational Patterns
 
