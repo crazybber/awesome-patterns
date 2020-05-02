@@ -25,27 +25,27 @@ A curated collection of idiomatic design & application patterns for Go language.
 
 | Pattern | Description | Status |
 |:-------:|:----------- |:------:|
-| [Bridge](/structural/bridge.md) | Decouples an interface from its implementation so that the two can vary independently | ✘ |
-| [Composite](/structural/composite.md) | Encapsulates and provides access to a number of different objects | ✘ |
+| [Bridge](/structural/bridge/main.go) | Decouples an interface from its implementation so that the two can vary independently | ✔ |
+| [Composite](/structural/composite/main.go) | Encapsulates and provides access to a number of different objects | ✔ |
 | [Decorator](/structural/decorator.md) | Adds behavior to an object, statically or dynamically | ✔ |
-| [Facade](/structural/facade.md) | Uses one type as an API to a number of others | ✘ |
-| [Flyweight](/structural/flyweight.md) | Reuses existing instances of objects with similar/identical state to minimize resource usage | ✘ |
+| [Facade](/structural/facade/main.go) | Uses one type as an API to a number of others | ✔ |
+| [Flyweight](/structural/flyweight/main.go) | Reuses existing instances of objects with similar/identical state to minimize resource usage | ✔ |
 | [Proxy](/structural/proxy.md) | Provides a surrogate for an object to control it's actions | ✔ |
 
 ## Behavioral Patterns
 
 | Pattern | Description | Status |
 |:-------:|:----------- |:------:|
-| [Chain of Responsibility](/behavioral/chain_of_responsibility.md) | Avoids coupling a sender to receiver by giving more than object a chance to handle the request | ✘ |
-| [Command](/behavioral/command.md) | Bundles a command and arguments to call later | ✘ |
-| [Mediator](/behavioral/mediator.md) | Connects objects and acts as a proxy | ✘ |
-| [Memento](/behavioral/memento.md) | Generate an opaque token that can be used to go back to a previous state | ✘ |
+| [Chain of Responsibility](/behavioral/chain_of_responsibility/main.go) | Avoids coupling a sender to receiver by giving more than object a chance to handle the request | ✔ |
+| [Command](/behavioral/command/main.go) | Bundles a command and arguments to call later | ✔ |
+| [Mediator](/behavioral/mediator/main.go) | Connects objects and acts as a proxy | ✔ |
+| [Memento](/behavioral/memento/main.go) | Generate an opaque token that can be used to go back to a previous state | ✔ |
 | [Observer](/behavioral/observer.md) | Provide a callback for notification of events/changes to data | ✔ |
 | [Registry](/behavioral/registry.md) | Keep track of all subclasses of a given class | ✘ |
-| [State](/behavioral/state.md) | Encapsulates varying behavior for the same object based on its internal state | ✘ |
+| [State](/behavioral/state/main.go) | Encapsulates varying behavior for the same object based on its internal state | ✔ |
 | [Strategy](/behavioral/strategy.md) | Enables an algorithm's behavior to be selected at runtime | ✔ |
-| [Template](/behavioral/template.md) | Defines a skeleton class which defers some methods to subclasses | ✘ |
-| [Visitor](/behavioral/visitor.md) | Separates an algorithm from an object on which it operates | ✘ |
+| [Template](/behavioral/template/main.go) | Defines a skeleton class which defers some methods to subclasses | ✔ |
+| [Visitor](/behavioral/visitor/main.go) | Separates an algorithm from an object on which it operates | ✔ |
 
 ## Synchronization Patterns
 
@@ -61,7 +61,7 @@ A curated collection of idiomatic design & application patterns for Go language.
 
 | Pattern | Description | Status |
 |:-------:|:----------- |:------:|
-| [N-Barrier](/concurrency/barrier.md) | Prevents a process from proceeding until all N processes reach to the barrier | ✘ |
+| [N-Barrier](/concurrency/n_barrier/main.go) | Prevents a process from proceeding until all N processes reach to the barrier | ✔ |
 | [Bounded Parallelism](/concurrency/bounded_parallelism.md) | Completes large number of independent tasks with resource limits | ✔ |
 | [Broadcast](/concurrency/broadcast.md) | Transfers a message to all recipients simultaneously | ✘ |
 | [Coroutines](/concurrency/coroutine.md) | Subroutines that allow suspending and resuming execution at certain locations | ✘ |
