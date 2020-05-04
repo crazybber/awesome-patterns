@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/weichou1229/go-patterns/playground/singleton/internal"
+	"github.com/crazybber/go-patterns/playground/singleton/internal"
 )
 
 func main() {

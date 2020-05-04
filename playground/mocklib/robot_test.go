@@ -1,8 +1,9 @@
 package mocklib
 
 import (
-	"github.com/weichou1229/go-patterns/playground/mocklib/mocks"
 	"testing"
+
+	"github.com/crazybber/go-patterns/playground/mocklib/mocks"
 )
 
 func TestStartRobots(t *testing.T) {
