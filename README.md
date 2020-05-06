@@ -11,7 +11,8 @@
 
 A curated collection of idiomatic design & application patterns for Go language.
 
-#### this is a fork of https://github.com/tmrts/go-patterns but merged in with other awesome forks.
+#### this is a fork of https://github.com/tmrts/go-patterns but merged in with other awesome forks. can go with [go-patterns-in-examples](https://github.com/crazybber/go-fucking-patterns)
+
 
 ## Update History
 
@@ -118,3 +119,7 @@ A curated collection of idiomatic design & application patterns for Go language.
 | Pattern | Description | Status |
 |:-------:|:----------- |:------:|
 | [Cascading Failures](/anti-patterns/cascading_failures.md) | A failure in a system of interconnected parts in which the failure of a part causes a domino effect | ✘ |
+
+## A pattern implementation
+
+[go-patterns-in-examples](https://github.com/crazybber/go-fucking-patterns)
