@@ -16,7 +16,7 @@ A curated collection of idiomatic design & application patterns for Go language.
 ## Update History
 
 + *Merged : https://github.com/nynicg/go-patterns*
-+ *Merged : https://github.com/weichou1229/go-patterns* 
++ *Merged : https://github.com/weichou1229/go-patterns*
 + *Merged : https://github.com/jianhan/go-patterns*
 + *Merged : https://github.com/sakari-ai/go-patterns*
 + *Merged ：https://github.com/restudy/go-patterns*
@@ -25,7 +25,7 @@ A curated collection of idiomatic design & application patterns for Go language.
 
 | Pattern | Description | Status |
 |:-------:|:----------- |:------:|
-| [Abstract Factory](/creational/abstract_factory.md) | Provides an interface for creating families of releated objects | ✘ |
+| [Abstract Factory](/creational/abstract_factory.md) | Provides an interface for creating families of releated objects | ✔ |
 | [Builder](/creational/builder.md) | Builds a complex object using simple objects | ✔ |
 | [Factory Method](/creational/factory.md) | Defers instantiation of an object to a specialized function for creating instances | ✔ |
 | [Object Pool](/creational/object-pool.md) | Instantiates and maintains a group of objects instances of the same type | ✔ |
@@ -57,6 +57,7 @@ A curated collection of idiomatic design & application patterns for Go language.
 | [Template](/behavioral/template/main.go) | Defines a skeleton class which defers some methods to subclasses | ✔ |
 | [Visitor](/behavioral/visitor/main.go) | Separates an algorithm from an object on which it operates | ✔ |
 | [Visitor](/behavioral/interpreter/interpreter.md) | interpret your own language or composed commands  | ✘ |
+
 ## Synchronization Patterns
 
 | Pattern | Description | Status |
@@ -76,7 +77,7 @@ A curated collection of idiomatic design & application patterns for Go language.
 | [Broadcast](/concurrency/broadcast.md) | Transfers a message to all recipients simultaneously | ✘ |
 | [Coroutines](/concurrency/coroutine.md) | Subroutines that allow suspending and resuming execution at certain locations | ✘ |
 | [Generators](/concurrency/generator.md) | Yields a sequence of values one at a time | ✔ |
-| [Reactor](/concurrency/reactor.md) | Demultiplexes service requests delivered concurrently to a service handler and dispatches them syncronously to the associated request handlers | ✘ |
+| [Reactor](/concurrency/reactor.md) | Demultiplexes service requests delivered concurrently to a service handler and dispatches them synchronously to the associated request handlers | ✘ |
 | [Parallelism](/concurrency/parallelism.md) | Completes large number of independent tasks | ✔ |
 | [Producer Consumer](/concurrency/producer_consumer.md) | Separates tasks from task executions | ✘ |
 
@@ -96,7 +97,7 @@ A curated collection of idiomatic design & application patterns for Go language.
 |:-------:|:----------- |:------:|
 | [Bulkheads](/stability/bulkhead.md)  | Enforces a principle of failure containment (i.e. prevents cascading failures) | ✘ |
 | [Circuit-Breaker](/stability/circuit-breaker.md) | Stops the flow of the requests when requests are likely to fail | ✔ |
-| [Deadline](/stability/deadline.md) | Allows clients to stop waiting for a response once the probability of response becomes low (e.g. after waiting 10 seconds for a page refresh) | ✘ |
+| [Deadline](/stability/deadline.md) | Allows clients to stop waiting for a response once the probability of response becomes low (e.g. after waiting 10 seconds for a page refresh) | ✔ |
 | [Fail-Fast](/stability/fail_fast.md) | Checks the availability of required resources at the start of a request and fails if the requirements are not satisfied | ✘ |
 | [Handshaking](/stability/handshaking.md) | Asks a component if it can take any more load, if it can't, the request is declined | ✘ |
 | [Steady-State](/stability/steady_state.md) | For every service that accumulates a resource, some other service must recycle that resource | ✘ |
