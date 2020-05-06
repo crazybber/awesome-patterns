@@ -11,7 +11,7 @@
 
 A curated collection of idiomatic design & application patterns for Go language.
 
-#### this is a fork of https://github.com/tmrts/go-patterns but merged in with other awesome forks. can go with [go-patterns-in-examples](https://github.com/crazybber/go-fucking-patterns)
+#### this is a fork of https://github.com/tmrts/go-patterns but merged in with other awesome forks. can go with [patterns-in-examples](https://github.com/crazybber/go-fucking-patterns)
 
 
 ## Update History
