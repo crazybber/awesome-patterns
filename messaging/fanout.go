@@ -2,9 +2,10 @@ package messaging
 
 import (
 	"context"
-	"go.uber.org/zap"
 	"sync"
 	"sync/atomic"
+
+	"go.uber.org/zap"
 )
 
 var (
