@@ -88,7 +88,7 @@ A curated collection of idiomatic design & application patterns for Go language.
 |:-------:|:----------- |:------:|
 | [Fan-In](/messaging/fan_in.md) | Funnels tasks to a work sink (e.g. server) | ✔ |
 | [Fan-Out](/messaging/fan_out.md) | Distributes tasks among workers (e.g. producer) | ✔ |
-| [Futures & Promises](/messaging/futures_promises.md) | Acts as a place-holder of a result that is initially unknown for synchronization purposes | ✘ |
+| [Futures & Promises](/messaging/futures_promises.md) | Acts as a place-holder of a result that is initially unknown for synchronization purposes |  ✔ |
 | [Publish/Subscribe](/messaging/publish_subscribe.md) | Passes information to a collection of recipients who subscribed to a topic | ✔ |
 | [Push & Pull](/messaging/push_pull.md) | Distributes messages to multiple workers, arranged in a pipeline | ✘ |
 
