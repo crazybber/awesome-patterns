@@ -1,5 +1,7 @@
 package main
 
+import "log"
+
 type Object func(int) int
 
 func LogDecorate(fn Object) Object {
@@ -10,19 +12,18 @@ func LogDecorate(fn Object) Object {
 
 		log.Println("Execution is completed with the result", result)
 
-        return result
+		return result
 	}
 }
 
 func Double(n int) int {
-    return n * 2
+	return n * 2
 }
 
-func main(){
-  f := LogDecorate(Double)
-  f(5)
+func main() {
+	f := LogDecorate(Double)
+	f(5)
 }
-
 
 // Starting execution with the integer 5
 // Execution is completed with the result 10
