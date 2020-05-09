@@ -80,7 +80,7 @@ A curated collection of idiomatic design & application patterns for Go language.
 | [Generators](/concurrency/generator.md) | Yields a sequence of values one at a time | ✔ |
 | [Reactor](/concurrency/reactor.md) | Demultiplexes service requests delivered concurrently to a service handler and dispatches them synchronously to the associated request handlers | ✘ |
 | [Parallelism](/concurrency/parallelism.md) | Completes large number of independent tasks | ✔ |
-| [Producer Consumer](/concurrency/producer_consumer.md) | Separates tasks from task executions | ✘ |
+| [Producer Consumer](/channel/producer_consumer) | Separates tasks from task executions | ✔ |
 
 ## Messaging Patterns
 
