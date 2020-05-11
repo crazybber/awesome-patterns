@@ -3,10 +3,9 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"math/rand"
 	"sync"
 	"time"
-
-	"github.com/golang/go/src/pkg/math/rand"
 )
 
 // Confinement is the simple yet powerful idea of ensuring information is only ever available from one concurrent process.
