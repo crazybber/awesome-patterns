@@ -18,7 +18,7 @@ way to do so.
 import (
     "fmt"
 
-    "github.com/kaezon/go-registry"
+    "github.com/crazybber/awesome-patterns/behavioral/registry"
 )
 
 var myReg registry.Registry
