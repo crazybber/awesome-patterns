@@ -1,5 +1,7 @@
 # go-registry
 
+Merged :https://github.com/Kaezon/go-registry
+
 ## A generic interface for the registry pattern
 
 Because adding a registry pattern to each project can result in a lot of code duplication,
