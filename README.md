@@ -57,7 +57,7 @@ A curated collection of idiomatic design & application patterns for Go language.
 | [Strategy](/behavioral/strategy.md) | Enables an algorithm's behavior to be selected at runtime | ✔ |
 | [Template](/behavioral/template/main.go) | Defines a skeleton class which defers some methods to subclasses | ✔ |
 | [Visitor](/behavioral/visitor/main.go) | Separates an algorithm from an object on which it operates | ✔ |
-| [Interpreter](/behavioral/interpreter/interpreter.md) | interpret your own language or composed commands  | ✘ |
+| [Interpreter](/behavioral/interpreter/interpreter.md) | interpret your own language or composed commands  | ✔ |
 
 ## Synchronization Patterns
 
