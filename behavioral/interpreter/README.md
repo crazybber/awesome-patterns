@@ -1,4 +1,6 @@
 
-prepare merge:
+merged:
 
-https://github.com/Jagepard/GoDesignPatterns-Interpreter/blob/master/Interpreter.go
+https://github.com/Jagepard/GoDesignPatterns-Interpreter
+
+
