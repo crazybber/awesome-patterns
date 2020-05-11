@@ -52,7 +52,7 @@ A curated collection of idiomatic design & application patterns for Go language.
 | [Mediator](/behavioral/mediator/main.go) | Connects objects and acts as a proxy | ✔ |
 | [Memento](/behavioral/memento/main.go) | Generate an opaque token that can be used to go back to a previous state | ✔ |
 | [Observer](/behavioral/observer.md) | Provide a callback for notification of events/changes to data | ✔ |
-| [Registry](/behavioral/registry.md) | Keep track of all subclasses of a given class | ✘ |
+| [Registry](/behavioral/registry.md) | Keep track of all subclasses of a given class | ✔ |
 | [State](/behavioral/state/main.go) | Encapsulates varying behavior for the same object based on its internal state | ✔ |
 | [Strategy](/behavioral/strategy.md) | Enables an algorithm's behavior to be selected at runtime | ✔ |
 | [Template](/behavioral/template/main.go) | Defines a skeleton class which defers some methods to subclasses | ✔ |
