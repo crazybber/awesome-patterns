@@ -64,36 +64,43 @@ type Circuit func(context.Context) error
 
 func Breaker(c Circuit, failureThreshold uint32) Circuit {
     cnt := NewCounter()
+	expired := time.Now()
+	currentState := StateClosed
+    
+   	return func(ctx context.Context) error {
 
-    return func(ctx context) error {
-        if cnt.ConsecutiveFailures() >= failureThreshold {
-            canRetry := func(cnt Counter) {
-                backOffLevel := Cnt.ConsecutiveFailures() - failureThreshold
 
-                // Calculates when should the circuit breaker resume propagating requests
-                // to the service
-                shouldRetryAt := cnt.LastActivity().Add(time.Seconds * 2 << backOffLevel)
+		//handle statue transformation for timeout
+		if currentState == StateOpen {
+			nowt := time.Now()
+			if expired.Before(nowt) || expired.Equal(nowt) {
+				currentState = StateHalfOpen 
+				cnt.ConsecutiveSuccesses = 0 
+			}
+		}
 
-                return time.Now().After(shouldRetryAt)
-            }
+		switch currentState {
+		case StateOpen:
+			return ErrServiceUnavailable 
+		case StateHalfOpen:
+			if err := c(ctx); err != nil {
+				currentState = StateOpen
+				expired = time.Now().Add(defaultTimeout) //Reset
+				return err
+			}
+			cnt.Count(SuccessState)
+			if cnt.ConsecutiveSuccesses > defaultSuccessThreshold {
+				currentState = StateClosed
+				cnt.ConsecutiveFailures = 0
+			}
 
-            if !canRetry(cnt) {
-                // Fails fast instead of propagating requests to the circuit since
-                // not enough time has passed since the last failure to retry
-                return ErrServiceUnavailable
-            }
-        }
-
-        // Unless the failure threshold is exceeded the wrapped service mimics the
-        // old behavior and the difference in behavior is seen after consecutive failures
-        if err := c(ctx); err != nil {
-            cnt.Count(FailureState)
-            return err
-        }
-
-        cnt.Count(SuccessState)
-        return nil
-    }
+		case StateClosed:
+			if err := c(ctx); err != nil {
+				cnt.Count(FailureState)
+			}
+		}
+		return nil
+	}
 }
 ```
 
