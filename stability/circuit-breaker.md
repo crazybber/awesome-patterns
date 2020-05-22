@@ -12,7 +12,7 @@ document.
 ## Implementation
 
 Below is the implementation of a very simple circuit breaker to illustrate the purpose
-of the circuit breaker design pattern.
+of the circuit breaker design pattern for  [Circuit Breaker Pattern](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/dn589784(v=pandp.10)?redirectedfrom=MSDN)
 
 ### Operation Counter
 
