@@ -104,6 +104,8 @@ func Breaker(c Circuit, failureThreshold uint32) Circuit {
 }
 ```
 
-## Related Works
+## Related Contents
+
+- [Circuit Breaker Pattern](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/dn589784(v=pandp.10)?redirectedfrom=MSDN)
 
 - [sony/gobreaker](https://github.com/sony/gobreaker) is a well-tested and intuitive circuit breaker implementation for real-world use cases.
