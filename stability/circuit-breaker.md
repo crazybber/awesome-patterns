@@ -41,6 +41,12 @@ type Counter interface {
     LastActivity() time.Time
     Reset()
 }
+
+type counters struct {
+   ConsecutiveFailures  uint32
+   ConsecutiveSuccesses uint32
+}
+
 ```
 
 ### Circuit Breaker
@@ -59,21 +65,6 @@ import (
     "context"
     "time"
 )
-
-type State int
-
-const (
-	UnknownState State = iota
-	FailureState
-	SuccessState
-)
-
-type Counter interface {
-	Count(State)
-	ConsecutiveFailures() uint32
-	LastActivity() time.Time
-	Reset()
-}
 
 type Circuit func(context.Context) error
 
