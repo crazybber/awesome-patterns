@@ -60,45 +60,52 @@ import (
     "time"
 )
 
+type State int
+
+const (
+	UnknownState State = iota
+	FailureState
+	SuccessState
+)
+
+type Counter interface {
+	Count(State)
+	ConsecutiveFailures() uint32
+	LastActivity() time.Time
+	Reset()
+}
+
 type Circuit func(context.Context) error
 
+var canRetry = func(cnt counters, failureThreshold uint32) bool {
+	backoffLevel := cnt.ConsecutiveFailures - failureThreshold
+	// Calculates when should the circuit breaker resume propagating requests
+	// to the service
+	shouldRetryAt := cnt.LastActivity().Add(time.Second << backoffLevel)
+	return time.Now().After(shouldRetryAt)
+}
+
 func Breaker(c Circuit, failureThreshold uint32) Circuit {
-    cnt := NewCounter()
-	expired := time.Now()
-	currentState := StateClosed
-    
-   	return func(ctx context.Context) error {
+	cnt := counters{}
 
+	//ctx can be used hold parameters
+	return func(ctx context.Context) error {
 
-		//handle statue transformation for timeout
-		if currentState == StateOpen {
-			nowt := time.Now()
-			if expired.Before(nowt) || expired.Equal(nowt) {
-				currentState = StateHalfOpen 
-				cnt.ConsecutiveSuccesses = 0 
+		if cnt.ConsecutiveFailures >= failureThreshold {
+			if !canRetry(cnt, failureThreshold) {
+				// Fails fast instead of propagating requests to the circuit since
+				// not enough time has passed since the last failure to retry
+				return ErrServiceUnavailable
 			}
 		}
-
-		switch currentState {
-		case StateOpen:
-			return ErrServiceUnavailable 
-		case StateHalfOpen:
-			if err := c(ctx); err != nil {
-				currentState = StateOpen
-				expired = time.Now().Add(defaultTimeout) //Reset
-				return err
-			}
-			cnt.Count(SuccessState)
-			if cnt.ConsecutiveSuccesses > defaultSuccessThreshold {
-				currentState = StateClosed
-				cnt.ConsecutiveFailures = 0
-			}
-
-		case StateClosed:
-			if err := c(ctx); err != nil {
-				cnt.Count(FailureState)
-			}
+		// Unless the failure threshold is exceeded the wrapped service mimics the
+		// old behavior and the difference in behavior is seen after consecutive failures
+	         if err := c(ctx); err != nil {
+			cnt.Count(FailureState)
+			return err
 		}
+
+		cnt.Count(SuccessState)
 		return nil
 	}
 }
