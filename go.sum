@@ -11,6 +11,8 @@ github.com/golang/go/src v0.0.0-20200503072332-53f27474a455 h1:nFFYbwvrsBUXVDczc
 github.com/golang/go/src v0.0.0-20200509044625-0242d461c929 h1:0oubbfFk6+m8E9yeUB+H+yt8ILOPdxXtkLFcjxuN+Dc=
 github.com/golang/go/src v0.0.0-20200510102235-000636fdb58c h1:0KBw0VHp9QLiiVfPwrjUW96sEX/4+0sZVKbS0O1Kr+w=
 github.com/google/renameio v0.1.0/go.mod h1:KWCgfxg9yswjAJkECMjeO8J8rahYeXnNhOm40UhjYkI=
+github.com/google/uuid v1.1.1 h1:Gkbcsh/GbpXz7lPftLA3P6TYMwjCLYm83jiFQZF/3gY=
+github.com/google/uuid v1.1.1/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/graphql-go/graphql v0.7.9 h1:5Va/Rt4l5g3YjwDnid3vFfn43faaQBq7rMcIZ0VnV34=
 github.com/graphql-go/graphql v0.7.9/go.mod h1:k6yrAYQaSP59DC5UVxbgxESlmVyojThKdORUqGDGmrI=
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
