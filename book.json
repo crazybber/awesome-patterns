@@ -7,10 +7,10 @@
     ],
     "pluginsConfig": {
         "github": {
-            "url": "https://github.com/tmrts/go-patterns"
+            "url": "https://github.com/crazybber/awesome-patterns"
         },
         "edit-link": {
-            "base": "https://github.com/tmrts/go-patterns/edit/master/",
+            "base": "https://github.com/crazybber/awesome-patterns/edit/master/",
             "label": ""
         }
     }
