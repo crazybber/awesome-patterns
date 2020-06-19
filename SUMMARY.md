@@ -1,6 +1,6 @@
 # Summary
 
-* [Go Patterns](/README.md)
+* [Go awesome-patterns](/README.md)
   * [Creational Patterns](/README.md#creational-patterns)
     * [Abstract Factory](/creational/abstract_factory.md)
     * [Builder](/creational/builder.md)
