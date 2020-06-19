@@ -123,4 +123,4 @@ A curated collection of idiomatic design & application patterns for Go language.
 
 ## A pattern implementation
 
-[go-patterns-in-examples](https://github.com/crazybber/go-pattern-examples)
+[go-pattern-examples](https://github.com/crazybber/go-pattern-examples)
