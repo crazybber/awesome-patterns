@@ -6,6 +6,12 @@ import (
 	"time"
 )
 
+func assertEqual(t *testing.T, a interface{}, b interface{}) {
+	if a != b {
+		t.Fatalf("%s != %s", a, b)
+	}
+}
+
 func takesFiveMillis(stopper <-chan struct{}) error {
 	time.Sleep(5 * time.Millisecond)
 	return nil
@@ -27,12 +33,12 @@ func TestDeadline(t *testing.T) {
 		t.Error(err)
 	}
 
-	if err := dl.Run(takesTwentyMillis); err != ErrTimedOut {
-		t.Error(err)
+	if err := dl.Run(takesTwentyMillis); err != nil {
+		assertEqual(t, err, ErrTimedOut)
 	}
 
-	if err := dl.Run(returnsError); err.Error() != "foo" {
-		t.Error(err)
+	if err := dl.Run(returnsError); err != nil {
+		assertEqual(t, err.Error(), "foo")
 	}
 
 	done := make(chan struct{})

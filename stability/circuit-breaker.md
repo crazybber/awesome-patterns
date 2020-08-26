@@ -12,7 +12,7 @@ document.
 ## Implementation
 
 Below is the implementation of a very simple circuit breaker to illustrate the purpose
-of the circuit breaker design pattern  ,Only considering Open/Closed 
+of the circuit breaker design pattern, only considering Open/Closed 
 
 ### Operation Counter
 
