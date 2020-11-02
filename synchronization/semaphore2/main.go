@@ -52,7 +52,6 @@ func (s *implementation) Release() error {
 	case <-time.After(s.timeout):
 		return ErrIllegalRelease
 	}
-	return nil
 }
 
 func New(tickets int, timeout time.Duration) Interface {
