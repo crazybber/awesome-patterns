@@ -12,7 +12,7 @@ const (
 
 type MotorbikeFactory struct{}
 
-func (m *MotorbikeFactory) Build(v int) (Vehicle, error) {
+func (m *MotorbikeFactory) NewVehicle(v int) (Vehicle, error) {
 	switch v {
 	case SportMotorbikeType:
 		return new(SportMotorbike), nil
