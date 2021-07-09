@@ -4,10 +4,7 @@ import (
 	"testing"
 )
 
-var c = CarFactory{}
-
 func TestCarFactory(t *testing.T) {
-
 	carFactory, err := CreateVehicleFactory(CAR)
 	if err != nil {
 		t.Fatal(err)
