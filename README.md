@@ -43,6 +43,7 @@ A curated collection of idiomatic design & application patterns for Go language.
 | [Facade](/structural/facade/main.go) | Uses one type as an API to a number of others | ✔ |
 | [Flyweight](/structural/flyweight/main.go) | Reuses existing instances of objects with similar/identical state to minimize resource usage | ✔ |
 | [Proxy](/structural/decorator/proxy.md) | Provides a surrogate for an object to control it's actions | ✔ |
+| [Adapter](/structural/adapter/adapter.md) | Provides a surrogate for an object to control it's actions | ✔ |
 
 ## Behavioral Patterns
 
